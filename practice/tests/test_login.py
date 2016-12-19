@@ -1,30 +1,20 @@
-import unittest
+import pytest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 
-class TestHerokuapp(unittest.TestCase):
+def test_login_succeeded():
+    driver = webdriver.Chrome("C:\\chromedriver_win32\\chromedriver.exe")
+    driver.get("http://the-internet.herokuapp.com/login")
 
-    @classmethod
-    def setUpClass(self):
-        self.driver = webdriver.Chrome('/home/nathan/py3env/chromedriver/chromedriver')
+    driver.find_element_by_id('username').send_keys('tomsmith')
+    driver.find_element_by_id('password').send_keys('SuperSecretPassword!')
 
-    def test_login_succeeded(self):
-        driver = self.driver
-        driver.get("http://the-internet.herokuapp.com/login")
+    submit_button = driver.find_element_by_css_selector("button[type='submit']")
+    submit_button.click()
 
-        driver.find_element_by_id('username').send_keys('tomsmith')
-        driver.find_element_by_id('password').send_keys('SuperSecretPassword!')
-
-        submit_button = driver.find_element_by_css_selector("button[type='submit']")
-        submit_button.click()
-
-        self.assertTrue(driver.find_element_by_css_selector("div.flash.success").is_displayed())
-
-    @classmethod
-    def tearDown(self):
-        self.driver.close()
+    assert driver.find_element_by_css_selector("div.flash.success").is_displayed()
+    driver.close()
 
 if __name__ == "__main__":
-    unittest.main()
+    pytest.main()
 

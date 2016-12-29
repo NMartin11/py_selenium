@@ -16,7 +16,7 @@ def driver(request):
         browser = webdriver.Chrome('C:\\chromedriver_win32\\chromedriver.exe')
         browser.get("about:blank")
         browser.implicitly_wait(10)
-        browser.maximize_window()
+        request.addfinalizer(browser.quit)
         return browser
     else:
         print('Only Works with chrome')

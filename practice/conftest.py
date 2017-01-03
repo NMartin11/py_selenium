@@ -14,7 +14,7 @@ def driver(request):
     browser = request.config.getoption("--driver")
     if browser == 'chrome':
         browser = webdriver.Chrome('C:\\chromedriver_win32\\chromedriver.exe')
-        browser.get("about:blank")
+        browser.get(url)
         browser.implicitly_wait(10)
         request.addfinalizer(browser.quit)
         return browser

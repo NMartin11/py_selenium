@@ -16,7 +16,6 @@ class HerokuappPage(PageObject, PageElement):
         self.password_field = password
 
     def submit_login_form(self):
-        # self.submit_button.click()
-        self.pages.click_by_css("button[type='submit']")
+        self.submit_button.click()
 
 

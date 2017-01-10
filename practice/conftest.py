@@ -22,9 +22,13 @@ def driver(request):
     else:
         print('Only Works with chrome')
 
+
 @pytest.fixture
 def pages(driver):
-    class Pages(object):
+    class Pages(PageObject, PageElement):
+        def __init__(self):
+            self.driver = driver
+
         def url(self, name):
             driver.get(name)
 
@@ -33,26 +37,12 @@ def pages(driver):
             e.click()
 
         def click_by_id(self, id):
-            element =  PageElement(id_='id')
+            element = PageElement(id_='id')
             element.click
 
         def click_by_css(self, css):
-            element = PageElement(css=css)
+            selector = css
+            element = PageElement(css=selector)
             element.click()
 
     return Pages()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

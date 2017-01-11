@@ -1,13 +1,11 @@
 from page_objects import PageObject, PageElement
-from practice.conftest import pages
 
 
 class HerokuappPage(PageObject, PageElement):
+
     username_field = PageElement(id_='username')
     password_field = PageElement(id_='password')
     submit_button = PageElement(css="button[type='submit']")
-
-
 
     def fill_username_field(self, username):
         self.username_field = username
@@ -17,5 +15,6 @@ class HerokuappPage(PageObject, PageElement):
 
     def submit_login_form(self):
         self.submit_button.click()
+
 
 
